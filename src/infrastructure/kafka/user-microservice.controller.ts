@@ -17,12 +17,16 @@ export class UserMicroserviceController {
 
   @MessagePattern('user.created')
   async handleCreateUser(@Payload() data: any, @Ctx() context: KafkaContext) {
+    console.log('Datos enviados desde API:', JSON.stringify(data, null, 2));
+    
     try {
+      console.log('Creando usuario con email:', data.email);
       const command = new CreateUserCommand(data.email, data.fullName);
       const result = await this.createUserHandler.execute(command);
-      
+      console.log('Usuario creado:', result);
       return { success: true, data: result };
     } catch (error) {
+      console.log('Error al crear usuario:', error.message);
       return { success: false, error: error.message };
     }
   }
