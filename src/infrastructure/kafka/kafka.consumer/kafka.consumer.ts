@@ -4,7 +4,7 @@ import { CreateUserCommand } from '../../../application/commands/create-user.com
 
 @Injectable()
 export class KafkaConsumer {
-  constructor(private readonly createUserHandler: CreateUserHandler) {}
+  constructor(private readonly createUserHandler: CreateUserHandler) { }
 
   async consume(event: any) {
     const command = new CreateUserCommand(event.email, event.fullName);
