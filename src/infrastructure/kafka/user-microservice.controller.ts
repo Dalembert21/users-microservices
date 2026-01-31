@@ -1,19 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { 
-  MessagePattern, 
-  Payload, 
-  Ctx, 
-  KafkaContext 
-} from '@nestjs/microservices';
-import { CreateUserHandler } from '../../../application/handlers/create-user.handler/create-user.handler';
-import { CreateUserCommand } from '../../../application/commands/create-user.command/create-user.command';
-import { GetUserHandler } from '../../../application/handlers/query-handlers/get-user.handler/get-user.handler';
-import { GetUsersHandler } from '../../../application/handlers/query-handlers/get-users.handler/get-users.handler';
-import { GetUserQuery } from '../../../application/queries/get-user.query/get-user.query';
-import { GetUsersQuery } from '../../../application/queries/get-users.query/get-users.query';
+import { Controller } from '@nestjs/common';
+import { MessagePattern, Payload, Ctx, KafkaContext } from '@nestjs/microservices';
+import { CreateUserHandler } from '../../application/handlers/create-user.handler/create-user.handler';
+import { GetUserHandler } from '../../application/handlers/query-handlers/get-user.handler/get-user.handler';
+import { GetUsersHandler } from '../../application/handlers/query-handlers/get-users.handler/get-users.handler';
+import { CreateUserCommand } from '../../application/commands/create-user.command/create-user.command';
+import { GetUserQuery } from '../../application/queries/get-user.query/get-user.query';
+import { GetUsersQuery } from '../../application/queries/get-users.query/get-users.query';
 
-@Injectable()
-export class KafkaConsumer {
+@Controller()
+export class UserMicroserviceController {
   constructor(
     private readonly createUserHandler: CreateUserHandler,
     private readonly getUserHandler: GetUserHandler,

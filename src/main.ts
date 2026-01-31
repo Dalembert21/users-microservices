@@ -13,11 +13,22 @@ async function bootstrap() {
       },
       consumer: {
         groupId: 'users-microservice-consumer',
+        allowAutoTopicCreation: true,
+        subscribe: {
+          fromBeginning: false,
+        },
+      },
+      producer: {
+        brokers: ['localhost:9092'],
+        allowAutoTopicCreation: true,
+      },
+      run: {
+        autoCommit: true,
+        autoCommitInterval: 5000,
       },
     } as any,
   });
 
   await app.startAllMicroservices();
-  //await app.listen();
 }
 bootstrap();
